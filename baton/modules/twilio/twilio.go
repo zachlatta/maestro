@@ -173,7 +173,7 @@ func outboundCall(w http.ResponseWriter, r *http.Request) {
 	for i, callback := range outboundCalls {
 		if callback.number == jsonResponse["Called"] {
 			fmt.Fprintf(w, "<?xml version=\"1.0\" encoding=\"UTF-8\"?><Response>%s</Response>", callback.data)
-			callback.resp <-  jsonResponse
+			callback.resp <- jsonResponse
 			outboundCalls = append(outboundCalls[:i], outboundCalls[i+1:]...)
 			break
 		}
